@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "name"
+      },
+      {
+        "type": "text",
+        "name": "description"
+      },
+      {
+        "type": "text",
+        "name": "pays"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "insert",
+      "module": "dbupdater",
+      "action": "insert",
+      "options": {
+        "connection": "ALMUNAWAR",
+        "sql": {
+          "type": "insert",
+          "values": [
+            {
+              "table": "marques",
+              "column": "name",
+              "type": "text",
+              "value": "{{$_POST.name}}"
+            },
+            {
+              "table": "marques",
+              "column": "description",
+              "type": "text",
+              "value": "{{$_POST.description}}"
+            },
+            {
+              "table": "marques",
+              "column": "pays",
+              "type": "text",
+              "value": "{{$_POST.pays}}"
+            },
+            {
+              "table": "marques",
+              "column": "created_at",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            },
+            {
+              "table": "marques",
+              "column": "updated_at",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            }
+          ],
+          "table": "marques",
+          "returning": "id",
+          "query": "insert into `marques` (`created_at`, `description`, `name`, `pays`, `updated_at`) values (?, ?, ?, ?, ?)",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.name}}",
+              "test": ""
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.description}}",
+              "test": ""
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_POST.pays}}",
+              "test": ""
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{NOW}}",
+              "test": ""
+            },
+            {
+              "name": ":P5",
+              "type": "expression",
+              "value": "{{NOW}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "identity",
+          "type": "text"
+        },
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ],
+      "output": true
+    }
+  }
+}

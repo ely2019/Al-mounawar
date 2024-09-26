@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "codeProuit"
+      },
+      {
+        "type": "text",
+        "name": "name"
+      },
+      {
+        "type": "number",
+        "name": "categorie_id"
+      },
+      {
+        "type": "number",
+        "name": "marque_id"
+      },
+      {
+        "type": "number",
+        "name": "quantite"
+      },
+      {
+        "type": "number",
+        "name": "uni_price"
+      },
+      {
+        "type": "date",
+        "name": "fabrication_at"
+      },
+      {
+        "type": "date",
+        "name": "expiration_at"
+      },
+      {
+        "type": "text",
+        "name": "thing_type"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "insert",
+      "module": "dbupdater",
+      "action": "insert",
+      "options": {
+        "connection": "ALMUNAWAR",
+        "sql": {
+          "type": "insert",
+          "values": [
+            {
+              "table": "produits",
+              "column": "codeProuit",
+              "type": "text",
+              "value": "{{$_POST.codeProuit}}"
+            },
+            {
+              "table": "produits",
+              "column": "name",
+              "type": "text",
+              "value": "{{$_POST.name}}"
+            },
+            {
+              "table": "produits",
+              "column": "categorie_id",
+              "type": "number",
+              "value": "{{$_POST.categorie_id}}"
+            },
+            {
+              "table": "produits",
+              "column": "marque_id",
+              "type": "number",
+              "value": "{{$_POST.marque_id}}"
+            },
+            {
+              "table": "produits",
+              "column": "quantite",
+              "type": "number",
+              "value": "{{$_POST.quantite}}"
+            },
+            {
+              "table": "produits",
+              "column": "uni_price",
+              "type": "number",
+              "value": "{{$_POST.uni_price}}"
+            },
+            {
+              "table": "produits",
+              "column": "fabrication_at",
+              "type": "date",
+              "value": "{{$_POST.fabrication_at}}"
+            },
+            {
+              "table": "produits",
+              "column": "expiration_at",
+              "type": "date",
+              "value": "{{$_POST.expiration_at}}"
+            },
+            {
+              "table": "produits",
+              "column": "created_at",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            },
+            {
+              "table": "produits",
+              "column": "updated_at",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            },
+            {
+              "table": "produits",
+              "column": "thing_type",
+              "type": "text",
+              "value": "{{$_POST.thing_type}}"
+            }
+          ],
+          "table": "produits",
+          "returning": "id",
+          "query": "insert into `produits` (`categorie_id`, `codeProuit`, `created_at`, `expiration_at`, `fabrication_at`, `marque_id`, `name`, `quantite`, `thing_type`, `uni_price`, `updated_at`) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.codeProuit}}",
+              "test": ""
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.name}}",
+              "test": ""
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_POST.categorie_id}}",
+              "test": ""
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{$_POST.marque_id}}",
+              "test": ""
+            },
+            {
+              "name": ":P5",
+              "type": "expression",
+              "value": "{{$_POST.quantite}}",
+              "test": ""
+            },
+            {
+              "name": ":P6",
+              "type": "expression",
+              "value": "{{$_POST.uni_price}}",
+              "test": ""
+            },
+            {
+              "name": ":P7",
+              "type": "expression",
+              "value": "{{$_POST.fabrication_at}}",
+              "test": ""
+            },
+            {
+              "name": ":P8",
+              "type": "expression",
+              "value": "{{$_POST.expiration_at}}",
+              "test": ""
+            },
+            {
+              "name": ":P9",
+              "type": "expression",
+              "value": "{{NOW}}",
+              "test": ""
+            },
+            {
+              "name": ":P10",
+              "type": "expression",
+              "value": "{{NOW}}",
+              "test": ""
+            },
+            {
+              "name": ":P11",
+              "type": "expression",
+              "value": "{{$_POST.thing_type}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "identity",
+          "type": "text"
+        },
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
+}

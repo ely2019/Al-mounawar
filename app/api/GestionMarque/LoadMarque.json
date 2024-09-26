@@ -1,0 +1,40 @@
+{
+  "name": "custom",
+  "module": "dbupdater",
+  "action": "custom",
+  "options": {
+    "connection": "ALMUNAWAR",
+    "sql": {
+      "query": "SELECT * FROM marques \nORDER BY id DESC",
+      "params": []
+    }
+  },
+  "output": true,
+  "meta": [
+    {
+      "name": "id",
+      "type": "text"
+    },
+    {
+      "name": "name",
+      "type": "text"
+    },
+    {
+      "name": "description",
+      "type": "file"
+    },
+    {
+      "name": "pays",
+      "type": "text"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime"
+    },
+    {
+      "name": "updated_at",
+      "type": "datetime"
+    }
+  ],
+  "outputType": "array"
+}

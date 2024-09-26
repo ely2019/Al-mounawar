@@ -1,0 +1,169 @@
+<!-- Wappler include head-page="layouts/main" bootstrap5="local" is="dmx-app" id="GestionProduit" appConnect="local" components="{dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxBootstrap5Modal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5PagingGenerator:{},dmxValidator:{}}" fontawesome_4="local" -->
+<dmx-serverconnect id="sc_Categories" url="/api/GestionProduit/GetCategories"></dmx-serverconnect>
+<dmx-serverconnect id="sc_Marques" url="/api/GestionProduit/GetMarques"></dmx-serverconnect>
+
+
+
+
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="GestionClient" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5PagingGenerator:{}}" -->
+<dmx-data-detail id="data_detail" key="id" dmx-bind:data="LoadMarque.data.custom"></dmx-data-detail>
+
+<dmx-data-view id="dvMarque" dmx-bind:data="LoadMarque.data.custom" pageSize="20"></dmx-data-view>
+<div class="modal fade" id="AjouterMarque" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un Marque</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form is="dmx-serverconnect-form" id="AjoutMarque" method="post" action="/api/GestionMarque/AjoutMarque" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="AjouterMarque.hide();LoadMarque.load({},true)">
+                            <div class="form-group mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" dmxorgdomid="d268" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_description" class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_description" name="description" aria-describedby="inp_description_help" placeholder="Enter Description" dmxorgdomid="d272">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_pays" class="col-sm-2 col-form-label">Pays</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_pays" name="pays" aria-describedby="inp_pays_help" placeholder="Enter Pays" dmxorgdomid="d276" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-sm-12 text-end">
+                                    <button type="submit" class="btn btn-primary fw-bold" dmx-bind:disabled="state.executing" dmxorgdomid="d283">Save <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing" dmxorgdomid="d284"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModifierMarque" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier un Marque</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form is="dmx-serverconnect-form" id="ModifieMarque" method="post" action="/api/GestionMarque/ModifierMarque" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-populate="data_detail.data" dmx-on:success="ModifierMarque.hide();LoadMarque.load({})">
+                            <div class="form-group mb-3 row">
+                                <label for="inp_id" class="col-sm-2 col-form-label">Id</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_id" name="id" dmx-bind:value="data_detail.data.id" aria-describedby="inp_id_help" placeholder="Enter Id" readonly="true">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_name" name="name" dmx-bind:value="data_detail.data.name" aria-describedby="inp_name_help" placeholder="Enter Name">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_description" class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_description" name="description" dmx-bind:value="data_detail.data.description" aria-describedby="inp_description_help" placeholder="Enter Description">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_pays" class="col-sm-2 col-form-label">Pays</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_pays" name="pays" dmx-bind:value="data_detail.data.pays" aria-describedby="inp_pays_help" placeholder="Enter Pays">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3 row">
+                                <div class="col-sm-12 text-end">
+                                    <button type="submit" class="btn btn-primary fw-bold" dmx-bind:value="data_detail.data.Save" dmx-bind:disabled="state.executing">Save <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dmx-serverconnect id="LoadMarque" url="/api/GestionMarque/LoadMarque"></dmx-serverconnect>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row mb-2">
+
+                        <div class="col-10">
+                            <h4 class="card-title text-primary"><b>GESTION DES MARQUES</b></h4>
+                        </div>
+                        <div class="me-1 ps-0 pe-0 col-1">
+                            <button id="btnAjouter" class="btn fw-bold btn-primary mb-2" dmx-on:click="AjouterMarque.show()">
+                                Ajouter</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Pays</th>
+                                    <th>Created at</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvMarque.data" id="tableRepeat1">
+                                <tr dmx-on:click="data_detail.select(id)" dmx-class:table-primary="id==data_detail.data.id" dmx-on:dblclick="ModifierMarque.show()">
+                                    <td dmx-text="id" class="text-bg-primary bg-opacity-75 fw-bold"></td>
+                                    <td dmx-text="name" class="fw-bold"></td>
+                                    <td dmx-text="description"></td>
+                                    <td dmx-text="pays"></td>
+                                    <td dmx-text="created_at"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="pagination" dmx-dataview="dvMarque" dmx-generator="bs5paging">
+                                <li class="page-item" dmx-class:disabled="dvMarque.page == 1" aria-label="First">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvMarque.first()"><span aria-hidden="true">&lsaquo;&lsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvMarque.page == 1" aria-label="Previous">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvMarque.prev()"><span aria-hidden="true">&lsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:active="title == dvMarque.page" dmx-class:disabled="!active" dmx-repeat="dvMarque.getDataViewPagination(2,1,'...')">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvMarque.select(page)">{{title)}}</a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvMarque.page == dvMarque.pages" aria-label="Next">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvMarque.next()"><span aria-hidden="true">&rsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvMarque.page == dvMarque.pages" aria-label="Last">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvMarque.last()"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<meta name="ac:route" content="/GestionMarque">

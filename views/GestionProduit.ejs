@@ -1,0 +1,254 @@
+<!-- Wappler include head-page="layouts/main" bootstrap5="local" is="dmx-app" id="GestionProduit" appConnect="local" components="{dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxBootstrap5Modal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5PagingGenerator:{},dmxValidator:{}}" fontawesome_4="local" -->
+<dmx-serverconnect id="sc_Categories" url="/api/GestionProduit/GetCategories"></dmx-serverconnect>
+<dmx-serverconnect id="sc_Marques" url="/api/GestionProduit/GetMarques"></dmx-serverconnect>
+
+
+
+
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="GestionClient" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5PagingGenerator:{}}" -->
+<dmx-data-detail id="data_detail" key="id" dmx-bind:data="LoadProduit.data.custom"></dmx-data-detail>
+
+<dmx-data-view id="dvProduit" dmx-bind:data="LoadProduit.data.custom" pagesize="20"></dmx-data-view>
+<div class="modal fade" id="AjouterProduit" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un Produit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form is="dmx-serverconnect-form" id="AjoutProduit" method="post" action="/api/GestionProduit/AjoutClient" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="AjouterProduit.hide();LoadProduit.load({})">
+                            <div class="form-group mb-3 row">
+                                <label for="inp_codeProuit" class="col-sm-2 col-form-label">Code prouit</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_codeProuit" name="codeProuit" aria-describedby="inp_codeProuit_help" placeholder="Enter Code prouit" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_categorie_id" class="col-sm-2 col-form-label">Categorie</label>
+                                <div class="col-sm-10">
+                                    <select id="inp_categorie_id" class="form-select" name="categorie_id" dmx-bind:options="sc_Categories.data.custom" optiontext="name" optionvalue="id">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_marque_id" class="col-sm-2 col-form-label">Marque</label>
+                                <div class="col-sm-10">
+                                    <select id="inp_marque_id" class="form-select" name="marque_id" dmx-bind:options="sc_Marques.data.custom" optiontext="name" optionvalue="id">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_quantite" class="col-sm-2 col-form-label">Quantite</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inp_quantite" name="quantite" aria-describedby="inp_quantite_help" placeholder="Enter Quantite" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_uni_price" class="col-sm-2 col-form-label">Uni price</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inp_uni_price" name="uni_price" aria-describedby="inp_uni_price_help" placeholder="Enter Uni price" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_fabrication_at" class="col-sm-2 col-form-label">Fabrication at</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="inp_fabrication_at" name="fabrication_at" aria-describedby="inp_fabrication_at_help" placeholder="Enter Fabrication at">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_expiration_at" class="col-sm-2 col-form-label">Expiration at</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="inp_expiration_at" name="expiration_at" aria-describedby="inp_expiration_at_help" placeholder="Enter Expiration at">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_thing_type" class="col-sm-2 col-form-label">Thing type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_thing_type" name="thing_type" aria-describedby="inp_thing_type_help" placeholder="Enter Thing type">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-sm-12 text-end">
+                                    <button type="submit" class="btn btn-primary fw-bold" dmx-bind:disabled="state.executing">Enregistrer <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModifierProduit" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier un Produit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form is="dmx-serverconnect-form" id="ModifieProduits" method="post" action="/api/GestionProduit/ModifierProduit" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-populate="data_detail.data" dmx-on:success="ModifierProduit.hide();LoadProduit.load({})">
+                            <div class="form-group mb-3 row">
+                                <label for="inp_id" class="col-sm-2 col-form-label">Id</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_id" name="id" dmx-bind:value="data_detail.data.id" aria-describedby="inp_id_help" placeholder="Enter Id" readonly="true">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_codeProuit" class="col-sm-2 col-form-label">Code prouit</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_codeProuit" name="codeProuit" dmx-bind:value="data_detail.data.codeProuit" aria-describedby="inp_codeProuit_help" placeholder="Enter Code prouit">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_name" name="name" dmx-bind:value="data_detail.data.name" aria-describedby="inp_name_help" placeholder="Enter Name">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_categorie_id" class="col-sm-2 col-form-label">Categorie</label>
+                                <div class="col-sm-10">
+                                    <select id="inp_categorie_id" class="form-select" name="categorie_id" dmx-bind:options="sc_Categories.data.custom" optiontext="name" optionvalue="id" dmx-bind:value="data_detail.data.categorie_id">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_marque_id" class="col-sm-2 col-form-label">Marque</label>
+                                <div class="col-sm-10">
+                                    <select id="inp_marque_id" class="form-select" name="marque_id" dmx-bind:options="sc_Marques.data.custom" optiontext="name" optionvalue="id" dmx-bind:value="data_detail.data.marque_id">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_quantite" class="col-sm-2 col-form-label">Quantite</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_quantite" name="quantite" dmx-bind:value="data_detail.data.quantite" aria-describedby="inp_quantite_help" placeholder="Enter Quantite">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_uni_price" class="col-sm-2 col-form-label">Uni price</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_uni_price" name="uni_price" dmx-bind:value="data_detail.data.uni_price" aria-describedby="inp_uni_price_help" placeholder="Enter Uni price">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_fabrication_at" class="col-sm-2 col-form-label">Fabrication at</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="inp_fabrication_at" name="fabrication_at" dmx-bind:value="data_detail.data.fabrication_at" aria-describedby="inp_fabrication_at_help" placeholder="Enter Fabrication at">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_expiration_at" class="col-sm-2 col-form-label">Expiration at</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" id="inp_expiration_at" name="expiration_at" dmx-bind:value="data_detail.data.expiration_at" aria-describedby="inp_expiration_at_help" placeholder="Enter Expiration at">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_thing_type" class="col-sm-2 col-form-label">Thing type</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_thing_type" name="thing_type" dmx-bind:value="data_detail.data.thing_type" aria-describedby="inp_thing_type_help" placeholder="Enter Thing type">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-sm-12 text-end">
+                                    <button type="submit" class="btn btn-primary fw-bold" dmx-bind:value="data_detail.data.Save" dmx-bind:disabled="state.executing">Modifier <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dmx-serverconnect id="LoadProduit" url="/api/GestionProduit/LoadProduit"></dmx-serverconnect>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row mb-2">
+
+                        <div class="col-10">
+                            <h4 class="card-title text-primary"><b>GESTION DES PRODUITS</b></h4>
+                        </div>
+                        <div class="me-1 ps-0 pe-0 col-1">
+                            <button id="btnAjouter" class="btn fw-bold btn-primary mb-2" dmx-on:click="AjouterProduit.toggle()">
+                                Ajouter</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th class="bg-light-subtle">Id</th>
+                                    <th class="bg-light-subtle">Code prouit</th>
+                                    <th class="bg-light-subtle">Name</th>
+                                    <th class="bg-light-subtle">Categorie</th>
+                                    <th class="bg-light-subtle">Marque</th>
+                                    <th class="bg-light-subtle">Quantite</th>
+                                    <th class="bg-light-subtle">Uni price</th>
+                                    <th class="bg-light-subtle">Fabrication at</th>
+                                    <th class="bg-light-subtle">Expiration at</th>
+                                    <th class="bg-light-subtle">Thing type</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvProduit.data" id="tableRepeat2">
+                                <tr dmx-on:click="data_detail.select(id)" dmx-class:table-primary="id==data_detail.data.id" dmx-on:dblclick="ModifierProduit.show()">
+                                    <td dmx-text="id" class="text-bg-primary bg-opacity-75 fw-bold"></td>
+                                    <td dmx-text="codeProuit"></td>
+                                    <td dmx-text="name" class="fw-bold"></td>
+                                    <td dmx-text="categorie_id"></td>
+                                    <td dmx-text="marque_id"></td>
+                                    <td dmx-text="quantite"></td>
+                                    <td dmx-text="uni_price"></td>
+                                    <td dmx-text="fabrication_at"></td>
+                                    <td dmx-text="expiration_at"></td>
+                                    <td dmx-text="thing_type"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="pagination" dmx-dataview="dvProduit" dmx-generator="bs5paging">
+                                <li class="page-item" dmx-class:disabled="dvProduit.page == 1" aria-label="First">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvProduit.first()"><span aria-hidden="true">&lsaquo;&lsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvProduit.page == 1" aria-label="Previous">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvProduit.prev()"><span aria-hidden="true">&lsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:active="title == dvProduit.page" dmx-class:disabled="!active" dmx-repeat="dvProduit.getDataViewPagination(2,1,'...')">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvProduit.select(page)">{{title)}}</a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvProduit.page == dvProduit.pages" aria-label="Next">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvProduit.next()"><span aria-hidden="true">&rsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvProduit.page == dvProduit.pages" aria-label="Last">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvProduit.last()"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<meta name="ac:route" content="/GestionProduit">

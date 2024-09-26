@@ -1,0 +1,14 @@
+{
+  "GestionClient.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "GestionFournisseur.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  },
+  "GestionProduit.ejs": {
+    "layoutPage": "main",
+    "description": ""
+  }
+}

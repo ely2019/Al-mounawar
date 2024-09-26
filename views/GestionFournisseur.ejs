@@ -1,0 +1,208 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="GestionFournisseur" appConnect="local" components="{dmxBootstrap5Navigation:{},dmxDataTraversal:{},dmxBootstrap5Modal:{},dmxBootstrap5TableGenerator:{},dmxBootstrap5PagingGenerator:{},dmxValidator:{}}" -->
+
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="GestionClient" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5PagingGenerator:{}}" -->
+<dmx-data-detail id="data_detail" dmx-bind:data="LoadFournisseur.data.custom" key="id"></dmx-data-detail>
+
+<dmx-data-view id="dvFournisseur" dmx-bind:data="LoadFournisseur.data.custom" pagesize="20"></dmx-data-view>
+<div class="modal fade" id="AjouterFournisseur" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un Fournisseur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form is="dmx-serverconnect-form" id="AjoutFournisseur" method="post" action="/api/GestionFournisseur/AjoutFournisseur" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="AjouterFournisseur.hide();LoadFournisseur.load({})">
+                            <div class="form-group mb-3 row">
+                                <label for="inp_ice" class="col-sm-2 col-form-label">Ice</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_ice" name="ice" aria-describedby="inp_ice_help" placeholder="Enter Ice" dmxorgdomid="d387" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" dmxorgdomid="d391" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_email" name="email" aria-describedby="inp_email_help" placeholder="Enter Email" dmxorgdomid="d395" data-rule-email="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_type" class="col-sm-2 col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <select id="inp_type" class="form-select" name="type" dmxorgdomid="d399">
+                                        <option value="Particulier">Particulier</option>
+                                        <option value="Entreprise">Entreprise</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_phone" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_phone" name="phone" aria-describedby="inp_phone_help" placeholder="Enter Phone" dmxorgdomid="d403" data-rule-number="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_adress" class="col-sm-2 col-form-label">Adress</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_adress" name="adress" aria-describedby="inp_adress_help" placeholder="Enter Adress" dmxorgdomid="d407">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-sm-12 text-end">
+                                    <button type="submit" class="btn btn-primary fw-bold" dmx-bind:disabled="state.executing" dmxorgdomid="d410">Enregistrer <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing" dmxorgdomid="d411"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModifierFournisseur" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier un Fournisseur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form is="dmx-serverconnect-form" id="ModifieFournisseur" method="post" action="/api/GestionFournisseur/ModifierFournisseur" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-populate="data_detail.data" dmx-on:success="ModifierFournisseur.hide();LoadFournisseur.load({})">
+                            <div class="form-group mb-3 row">
+                                <label for="inp_id" class="col-sm-2 col-form-label">Id</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_id" name="id" dmx-bind:value="data_detail.data.id" aria-describedby="inp_id_help" placeholder="Enter Id" readonly="true">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_ice" class="col-sm-2 col-form-label">Ice</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_ice" name="ice" dmx-bind:value="data_detail.data.ice" aria-describedby="inp_ice_help" placeholder="Enter Ice">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_name" name="name" dmx-bind:value="data_detail.data.name" aria-describedby="inp_name_help" placeholder="Enter Name">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inp_email" name="email" dmx-bind:value="data_detail.data.email" aria-describedby="inp_email_help" placeholder="Enter Email">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_phone" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inp_phone" name="phone" dmx-bind:value="data_detail.data.phone" aria-describedby="inp_phone_help" placeholder="Enter Phone">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_type" class="col-sm-2 col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <select id="inp_type" class="form-select" name="type" dmx-bind:value="data_detail.data.type">
+                                        <option value="Particulier">Particulier</option>
+                                        <option value="Entreprise">Entreprise</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_adress" class="col-sm-2 col-form-label">Adress</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_adress" name="adress" dmx-bind:value="data_detail.data.adress" aria-describedby="inp_adress_help" placeholder="Enter Adress">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-sm-12 text-end">
+                                    <button type="submit" class="btn btn-primary fw-bold" dmx-bind:value="data_detail.data.Save" dmx-bind:disabled="state.executing">Modifier <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dmx-serverconnect id="LoadFournisseur" url="/api/GestionFournisseur/LoadFournisseur"></dmx-serverconnect>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row mb-2">
+
+                        <div class="col-10">
+                            <h4 class="card-title fw-bold text-primary">GESTION DES FOURNISSEURS</h4>
+                        </div>
+                        <div class="me-1 ps-0 pe-0 col-1">
+                            <button id="btnAjouter" class="btn fw-bold btn-primary mb-2" dmx-on:click="AjouterFournisseur.toggle()">Ajouter</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-bordered table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th class="bg-opacity-75 bg-light-subtle">Id</th>
+                                    <th class="bg-light-subtle">Ice</th>
+                                    <th class="bg-light-subtle">Name</th>
+                                    <th class="bg-light-subtle">Email</th>
+                                    <th class="bg-light-subtle">Phone</th>
+                                    <th class="bg-light-subtle">Type</th>
+                                    <th class="bg-light-subtle">Addresse</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvFournisseur.data" id="tableRepeat1">
+                                <tr dmx-on:click="data_detail.select(id)" dmx-class:table-primary="id==data_detail.data.id" dmx-on:dblclick="ModifierFournisseur.show()">
+                                    <td dmx-text="id" class="bg-opacity-75 text-bg-primary fw-bold"></td>
+                                    <td dmx-text="ice"></td>
+                                    <td dmx-text="name" class="fw-bold"></td>
+                                    <td dmx-text="email"></td>
+                                    <td dmx-text="phone"></td>
+                                    <td dmx-text="type"></td>
+                                    <td dmx-text="adress"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="pagination" dmx-dataview="dvFournisseur" dmx-generator="bs5paging">
+                                <li class="page-item" dmx-class:disabled="dvFournisseur.page == 1" aria-label="First">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvFournisseur.first()"><span aria-hidden="true">&lsaquo;&lsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvFournisseur.page == 1" aria-label="Previous">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvFournisseur.prev()"><span aria-hidden="true">&lsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:active="title == dvFournisseur.page" dmx-class:disabled="!active" dmx-repeat="dvFournisseur.getDataViewPagination(2,1,'...')">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvFournisseur.select(page)">{{title)}}</a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvFournisseur.page == dvFournisseur.pages" aria-label="Next">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvFournisseur.next()"><span aria-hidden="true">&rsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvFournisseur.page == dvFournisseur.pages" aria-label="Last">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvFournisseur.last()"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<meta name="ac:route" content="/GestionFournisseur">

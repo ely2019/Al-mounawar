@@ -1,0 +1,19 @@
+{
+  "name": "ALMUNAWAR",
+  "module": "dbconnector",
+  "action": "connect",
+  "options": {
+    "client": "mysql2",
+    "connection": {
+      "host": "localhost",
+      "port": 3306,
+      "user": "root",
+      "database": "comptable2"
+    },
+    "tz": "utc",
+    "meta": {}
+  },
+  "fileName": "ALMUNAWAR.json",
+  "actionFilePath": "file:///C:/Users/47699/Documents/Al_Munawar/app/modules/connections/ALMUNAWAR.json",
+  "serverType": "node"
+}

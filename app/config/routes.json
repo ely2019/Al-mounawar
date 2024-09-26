@@ -1,0 +1,24 @@
+{
+  "routes": [
+    {
+      "path": "/GestionMarque",
+      "page": "GestionMarque",
+      "layout": "main"
+    },
+    {
+      "path": "/GestionClient",
+      "page": "GestionClient",
+      "layout": "main"
+    },
+    {
+      "path": "/GestionFournisseur",
+      "page": "GestionFournisseur",
+      "layout": "main"
+    },
+    {
+      "path": "/GestionProduit",
+      "page": "GestionProduit",
+      "layout": "main"
+    }
+  ]
+}

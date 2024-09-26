@@ -1,0 +1,206 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="GestionClient" appConnect="local" components="{dmxBootstrap5TableGenerator:{},dmxBootstrap5Modal:{},dmxValidator:{},dmxDataTraversal:{},dmxBootstrap5PagingGenerator:{}}" -->
+<dmx-data-detail id="data_detail" dmx-bind:data="LoadClients.data.custom" key="id"></dmx-data-detail>
+
+<dmx-data-view id="dvClients" dmx-bind:data="LoadClients.data.custom" pagesize="20"></dmx-data-view>
+<div class="modal fade" id="AjouterClient" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un Client</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form is="dmx-serverconnect-form" id="AjoutClient" method="post" action="/api/GestionClient/AjoutClient" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-on:success="AjouterClient.hide();LoadClients.load({})">
+                            <div class="form-group mb-3 row">
+                                <label for="inp_ice" class="col-sm-2 col-form-label">Ice</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_ice" name="ice" aria-describedby="inp_ice_help" placeholder="Enter Ice" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_name" name="name" aria-describedby="inp_name_help" placeholder="Enter Name" required="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_email" name="email" aria-describedby="inp_email_help" placeholder="Enter Email" data-rule-email="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_type" class="col-sm-2 col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <select id="inp_type" class="form-select" name="type">
+                                        <option value="Particulier">Particulier</option>
+                                        <option value="Entreprise">Entreprise</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_phone" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_phone" name="phone" aria-describedby="inp_phone_help" placeholder="Enter Phone" data-rule-number="">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_adress" class="col-sm-2 col-form-label">Adress</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_adress" name="adress" aria-describedby="inp_adress_help" placeholder="Enter Adress">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-sm-12 text-end">
+                                    <button type="submit" class="btn btn-primary text-end fw-bold" dmx-bind:disabled="state.executing">Enregistrer&nbsp;<span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModifierClient" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modifier un Client</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form is="dmx-serverconnect-form" id="ModifieClients" method="post" action="/api/GestionClient/ModifierClient" dmx-generator="bootstrap5" dmx-form-type="horizontal" dmx-populate="data_detail.data" dmx-on:success="ModifierClient.hide();LoadClients.load({})">
+                            <div class="form-group mb-3 row">
+                                <label for="inp_id" class="col-sm-2 col-form-label">Id</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_id" name="id" dmx-bind:value="data_detail.data.id" aria-describedby="inp_id_help" placeholder="Enter Id" readonly="true">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_ice" class="col-sm-2 col-form-label">Ice</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_ice" name="ice" dmx-bind:value="data_detail.data.ice" aria-describedby="inp_ice_help" placeholder="Enter Ice">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_name" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_name" name="name" dmx-bind:value="data_detail.data.name" aria-describedby="inp_name_help" placeholder="Enter Name">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inp_email" name="email" dmx-bind:value="data_detail.data.email" aria-describedby="inp_email_help" placeholder="Enter Email">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_phone" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="inp_phone" name="phone" dmx-bind:value="data_detail.data.phone" aria-describedby="inp_phone_help" placeholder="Enter Phone">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_type" class="col-sm-2 col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <select id="inp_type" class="form-select" name="type" dmx-bind:value="data_detail.data.type">
+                                        <option value="Particulier">Particulier</option>
+                                        <option value="Entreprise">Entreprise</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <label for="inp_adress" class="col-sm-2 col-form-label">Adress</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inp_adress" name="adress" dmx-bind:value="data_detail.data.adress" aria-describedby="inp_adress_help" placeholder="Enter Adress">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-sm-12 text-end">
+                                    <button type="submit" class="btn btn-primary fw-bold" dmx-bind:value="data_detail.data.Save" dmx-bind:disabled="state.executing">Modifier <span class="spinner-border spinner-border-sm" role="status" dmx-show="state.executing"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dmx-serverconnect id="LoadClients" url="/api/GestionClient/LoadClient"></dmx-serverconnect>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row mb-2">
+
+                        <div class="col-10">
+                            <h4 class="card-title text-primary"><b>GESTION DES CLIENTS</b></h4>
+                        </div>
+                        <div class="me-1 ps-0 pe-0 col-1">
+                            <button id="btnAjouter" class="btn fw-bold btn-primary mb-2" dmx-on:click="AjouterClient.toggle()">
+                                Ajouter</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive small">
+                        <table class="table table-hover table-sm table-borderless table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="bg-light-subtle">Id</th>
+                                    <th class="bg-light-subtle">Ice</th>
+                                    <th class="bg-light-subtle">Name</th>
+                                    <th class="bg-light-subtle">Email</th>
+                                    <th class="bg-light-subtle">Phone</th>
+                                    <th class="bg-light-subtle">Type</th>
+                                    <th class="bg-light-subtle">Adress</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="dvClients.data" id="tableRepeat2">
+                                <tr dmx-class:table-primary="id==data_detail.data.id" dmx-on:click="data_detail.select(id)" dmx-on:dblclick="ModifierClient.show()">
+                                    <td dmx-text="id" class="text-bg-primary bg-opacity-75 fw-bold"></td>
+                                    <td dmx-text="ice"></td>
+                                    <td dmx-text="name" class="fw-bold"></td>
+                                    <td dmx-text="email"></td>
+                                    <td dmx-text="phone"></td>
+                                    <td dmx-text="type"></td>
+                                    <td dmx-text="adress"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul class="pagination" dmx-dataview="dvClients" dmx-generator="bs5paging">
+                                <li class="page-item" dmx-class:disabled="dvClients.page == 1" aria-label="First">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvClients.first()"><span aria-hidden="true">&lsaquo;&lsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvClients.page == 1" aria-label="Previous">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvClients.prev()"><span aria-hidden="true">&lsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:active="title == dvClients.page" dmx-class:disabled="!active" dmx-repeat="dvClients.getDataViewPagination(2,1,'...')">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvClients.select(page)">{{title)}}</a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvClients.page == dvClients.pages" aria-label="Next">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvClients.next()"><span aria-hidden="true">&rsaquo;</span></a>
+                                </li>
+                                <li class="page-item" dmx-class:disabled="dvClients.page == dvClients.pages" aria-label="Last">
+                                    <a href="javascript:void(0)" class="page-link" dmx-on:click="dvClients.last()"><span aria-hidden="true">&rsaquo;&rsaquo;</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<meta name="ac:route" content="/GestionClient">

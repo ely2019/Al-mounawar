@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "options": {
+      "linkedFile": "/views/GestionClient.ejs",
+      "linkedForm": "AjoutClient"
+    },
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ],
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "ice"
+      },
+      {
+        "type": "text",
+        "name": "name"
+      },
+      {
+        "type": "text",
+        "name": "email"
+      },
+      {
+        "type": "text",
+        "name": "type"
+      },
+      {
+        "type": "text",
+        "name": "phone"
+      },
+      {
+        "type": "text",
+        "name": "adress"
+      },
+      {
+        "type": "datetime",
+        "name": "created_at"
+      },
+      {
+        "type": "datetime",
+        "name": "updated_at"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "insert",
+      "module": "dbupdater",
+      "action": "insert",
+      "options": {
+        "connection": "ALMUNAWAR",
+        "sql": {
+          "type": "insert",
+          "values": [
+            {
+              "table": "clients",
+              "column": "ice",
+              "type": "text",
+              "value": "{{$_POST.ice}}"
+            },
+            {
+              "table": "clients",
+              "column": "name",
+              "type": "text",
+              "value": "{{$_POST.name}}"
+            },
+            {
+              "table": "clients",
+              "column": "email",
+              "type": "text",
+              "value": "{{$_POST.email}}"
+            },
+            {
+              "table": "clients",
+              "column": "type",
+              "type": "text",
+              "value": "{{$_POST.type}}"
+            },
+            {
+              "table": "clients",
+              "column": "phone",
+              "type": "text",
+              "value": "{{$_POST.phone}}"
+            },
+            {
+              "table": "clients",
+              "column": "adress",
+              "type": "text",
+              "value": "{{$_POST.adress}}"
+            },
+            {
+              "table": "clients",
+              "column": "created_at",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            },
+            {
+              "table": "clients",
+              "column": "updated_at",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            }
+          ],
+          "table": "clients",
+          "returning": "id",
+          "query": "insert into `clients` (`adress`, `created_at`, `email`, `ice`, `name`, `phone`, `type`, `updated_at`) values (?, ?, ?, ?, ?, ?, ?, ?)",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.ice}}",
+              "test": ""
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.name}}",
+              "test": ""
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_POST.email}}",
+              "test": ""
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{$_POST.type}}",
+              "test": ""
+            },
+            {
+              "name": ":P5",
+              "type": "expression",
+              "value": "{{$_POST.phone}}",
+              "test": ""
+            },
+            {
+              "name": ":P6",
+              "type": "expression",
+              "value": "{{$_POST.adress}}",
+              "test": ""
+            },
+            {
+              "name": ":P7",
+              "type": "expression",
+              "value": "{{NOW}}",
+              "test": ""
+            },
+            {
+              "name": ":P8",
+              "type": "expression",
+              "value": "{{NOW}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "identity",
+          "type": "text"
+        },
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
+}

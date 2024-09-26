@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "ice"
+      },
+      {
+        "type": "text",
+        "name": "name"
+      },
+      {
+        "type": "text",
+        "name": "email"
+      },
+      {
+        "type": "text",
+        "name": "type"
+      },
+      {
+        "type": "text",
+        "name": "phone"
+      },
+      {
+        "type": "text",
+        "name": "adress"
+      },
+      {
+        "type": "text",
+        "name": "id"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "update",
+      "module": "dbupdater",
+      "action": "update",
+      "options": {
+        "connection": "ALMUNAWAR",
+        "sql": {
+          "type": "update",
+          "values": [
+            {
+              "table": "fourniseurs",
+              "column": "ice",
+              "type": "text",
+              "value": "{{$_POST.ice}}"
+            },
+            {
+              "table": "fourniseurs",
+              "column": "name",
+              "type": "text",
+              "value": "{{$_POST.name}}"
+            },
+            {
+              "table": "fourniseurs",
+              "column": "email",
+              "type": "text",
+              "value": "{{$_POST.email}}"
+            },
+            {
+              "table": "fourniseurs",
+              "column": "type",
+              "type": "text",
+              "value": "{{$_POST.type}}"
+            },
+            {
+              "table": "fourniseurs",
+              "column": "phone",
+              "type": "text",
+              "value": "{{$_POST.phone}}"
+            },
+            {
+              "table": "fourniseurs",
+              "column": "adress",
+              "type": "text",
+              "value": "{{$_POST.adress}}"
+            },
+            {
+              "table": "fourniseurs",
+              "column": "updated_at",
+              "type": "datetime",
+              "value": "{{NOW}}"
+            }
+          ],
+          "table": "fourniseurs",
+          "wheres": {
+            "condition": "AND",
+            "rules": [
+              {
+                "id": "id",
+                "type": "string",
+                "operator": "equal",
+                "value": "{{$_POST.id}}",
+                "data": {
+                  "column": "id"
+                },
+                "operation": "="
+              }
+            ]
+          },
+          "returning": "id",
+          "query": "update `fourniseurs` set `ice` = ?, `name` = ?, `email` = ?, `type` = ?, `phone` = ?, `adress` = ?, `updated_at` = ? where `id` = ?",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.ice}}",
+              "test": ""
+            },
+            {
+              "name": ":P2",
+              "type": "expression",
+              "value": "{{$_POST.name}}",
+              "test": ""
+            },
+            {
+              "name": ":P3",
+              "type": "expression",
+              "value": "{{$_POST.email}}",
+              "test": ""
+            },
+            {
+              "name": ":P4",
+              "type": "expression",
+              "value": "{{$_POST.type}}",
+              "test": ""
+            },
+            {
+              "name": ":P5",
+              "type": "expression",
+              "value": "{{$_POST.phone}}",
+              "test": ""
+            },
+            {
+              "name": ":P6",
+              "type": "expression",
+              "value": "{{$_POST.adress}}",
+              "test": ""
+            },
+            {
+              "name": ":P7",
+              "type": "expression",
+              "value": "{{NOW}}",
+              "test": ""
+            },
+            {
+              "operator": "equal",
+              "type": "expression",
+              "name": ":P8",
+              "value": "{{$_POST.id}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
+}

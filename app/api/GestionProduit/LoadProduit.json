@@ -1,0 +1,55 @@
+{
+  "name": "custom",
+  "module": "dbupdater",
+  "action": "custom",
+  "options": {
+    "connection": "ALMUNAWAR",
+    "sql": {
+      "query": "SELECT id,codeProuit,name,categorie_id,marque_id,quantite,uni_price,fabrication_at,expiration_at,thing_type \nFROM produits \nORDER BY id DESC",
+      "params": []
+    }
+  },
+  "output": true,
+  "meta": [
+    {
+      "name": "id",
+      "type": "text"
+    },
+    {
+      "name": "codeProuit",
+      "type": "text"
+    },
+    {
+      "name": "name",
+      "type": "text"
+    },
+    {
+      "name": "categorie_id",
+      "type": "text"
+    },
+    {
+      "name": "marque_id",
+      "type": "text"
+    },
+    {
+      "name": "quantite",
+      "type": "text"
+    },
+    {
+      "name": "uni_price",
+      "type": "text"
+    },
+    {
+      "name": "fabrication_at",
+      "type": "date"
+    },
+    {
+      "name": "expiration_at",
+      "type": "date"
+    },
+    {
+      "name": "thing_type",
+      "type": "text"
+    }
+  ]
+}

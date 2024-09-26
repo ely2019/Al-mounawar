@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "id"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "custom",
+      "module": "dbupdater",
+      "action": "custom",
+      "options": {
+        "connection": "ALMUNAWAR",
+        "sql": {
+          "query": "DELETE FROM clients WHERE id = :P1",
+          "params": [
+            {
+              "name": ":P1",
+              "value": "{{$_GET.id}}",
+              "test": "462"
+            }
+          ]
+        }
+      },
+      "output": true,
+      "meta": [],
+      "outputType": "array"
+    }
+  }
+}

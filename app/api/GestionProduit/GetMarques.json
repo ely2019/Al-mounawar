@@ -1,0 +1,23 @@
+{
+  "name": "custom",
+  "module": "dbupdater",
+  "action": "custom",
+  "options": {
+    "connection": "ALMUNAWAR",
+    "sql": {
+      "query": "SELECT id,name FROM marques ",
+      "params": []
+    }
+  },
+  "output": true,
+  "meta": [
+    {
+      "name": "id",
+      "type": "text"
+    },
+    {
+      "name": "name",
+      "type": "text"
+    }
+  ]
+}
